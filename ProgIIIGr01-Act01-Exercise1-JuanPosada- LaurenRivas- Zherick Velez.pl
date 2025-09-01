@@ -35,7 +35,8 @@ es_mujer(ling).
 %Reglas o condiciones de relacion.
 abuelo(A,N) :- ((padre_de(A,P), padre_de(P,N)); (padre_de(A,M), madre_de(M,N))) , es_hombre(A). 
 abuela(A,N) :- ((madre_de(A,P), padre_de(P,N)) ; (madre_de(A,M), madre_de(M,N))) , es_mujer(A).
-hijo(H,P) :- padre_de(P,H) ; madre_de(P,H).
+hijo(H,P) :- padre_de(P,H) ; madre_de(P,H), es_hombre(H).
+hija(H,P) :- padre_de(P,H) ; madre_de(P,H), es_mujer(H).
 hermano(X,Y) :- X \= Y , ((madre_de(Z,X) , madre_de(Z,Y)) ; (padre_de(W,X) , padre_de(W,Y))) , es_hombre(X).
 hermana(H,O) :- H \= O, ((madre_de(M,H), madre_de(M,O)); padre_de(P,H), padre_de(P,O)) , es_mujer(H). 
 tio(X,Z) :- hermano(X,Y), (padre_de(Y,Z) ; madre_de(Y,Z)) , es_hombre(X).
